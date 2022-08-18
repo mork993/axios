@@ -1706,14 +1706,15 @@
    * Throws a `CanceledError` if cancellation has been requested.
    */
   function throwIfCancellationRequested(config) {
-    console.log('Config ', config);
     if (config.cancelToken) {
       console.log('Config cancelToken', config);
       config.cancelToken.throwIfRequested();
     }
-
+    if (config.signal) {
+      console.log('Config signal', config.signal);
+    }
     if (config.signal && config.signal.aborted) {
-      console.log('Config signal', config);
+      console.log('Config signal.aborted', config);
       throw new CanceledError_1(null, config, null);
     }
   }
