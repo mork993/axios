@@ -1285,6 +1285,7 @@
    * @param {Object=} request The request.
    */
   function CanceledError(message, config, request) {
+    console.log('CanceledError - config ', arguments);
     // eslint-disable-next-line no-eq-null,eqeqeq
     AxiosError_1.call(this, message == null ? 'canceled' : message, AxiosError_1.ERR_CANCELED, config, request);
     this.name = 'CanceledError';
@@ -1705,11 +1706,14 @@
    * Throws a `CanceledError` if cancellation has been requested.
    */
   function throwIfCancellationRequested(config) {
+    console.log('Config ', config);
     if (config.cancelToken) {
+      console.log('Config cancelToken', config);
       config.cancelToken.throwIfRequested();
     }
 
     if (config.signal && config.signal.aborted) {
+      console.log('Config signal', config);
       throw new CanceledError_1(null, config, null);
     }
   }
